@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <UniquePtr.h>
 #include <gatekeeper/gatekeeper.h>
 
 #include <endian.h>
+
+#include <memory>
 
 #define DAY_IN_MS (1000 * 60 * 60 * 24)
 
@@ -147,7 +148,7 @@ void GateKeeper::Verify(const VerifyRequest &request, VerifyResponse *response) 
 
     if (DoVerify(password_handle, request.provided_password)) {
         // Signature matches
-        UniquePtr<uint8_t> auth_token_buffer;
+        std::unique_ptr<uint8_t> auth_token_buffer;
         uint32_t auth_token_len;
         MintAuthToken(&auth_token_buffer, &auth_token_len, timestamp,
                 user_id, authenticator_id, request.challenge);
@@ -182,7 +183,7 @@ bool GateKeeper::CreatePasswordHandle(SizedBuffer *password_handle_buffer, salt_
 
     uint32_t metadata_length = sizeof(user_id) + sizeof(flags) + sizeof(HANDLE_VERSION);
     const size_t to_sign_size = password_length + metadata_length;
-    UniquePtr<uint8_t> to_sign(new uint8_t[to_sign_size]);
+    std::unique_ptr<uint8_t> to_sign(new uint8_t[to_sign_size]);
 
     if (to_sign.get() == nullptr) {
         return false;
@@ -220,7 +221,7 @@ bool GateKeeper::DoVerify(const password_handle_t *expected_handle, const SizedB
             sizeof(expected_handle->signature)) == 0;
 }
 
-void GateKeeper::MintAuthToken(UniquePtr<uint8_t> *auth_token, uint32_t *length,
+void GateKeeper::MintAuthToken(std::unique_ptr<uint8_t> *auth_token, uint32_t *length,
         uint64_t timestamp, secure_id_t user_id, secure_id_t authenticator_id,
         uint64_t challenge) {
     if (auth_token == NULL) return;

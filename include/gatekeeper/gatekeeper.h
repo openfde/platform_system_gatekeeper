@@ -18,7 +18,7 @@
 #define GATEKEEPER_H_
 
 #include <stdint.h>
-#include <UniquePtr.h>
+#include <memory>
 #include <hardware/hw_auth_token.h>
 
 #include "gatekeeper_messages.h"
@@ -94,7 +94,7 @@ protected:
      * Retrieves a unique, cryptographically randomly generated buffer for use in password
      * hashing, etc.
      *
-     * Assings the random to the random UniquePtr, relinquishing ownership to the caller
+     * Assings the random to the random std::unique_ptr, relinquishing ownership to the caller
      */
     virtual void GetRandom(void *random, uint32_t requested_size) const = 0;
 
@@ -172,11 +172,11 @@ protected:
 private:
     /**
      * Generates a signed attestation of an authentication event and assings
-     * to auth_token UniquePtr.
+     * to auth_token std::unique_ptr.
      * The format is consistent with that of hw_auth_token_t.
      * Also returns the length in length if it is not null.
      */
-    void MintAuthToken(UniquePtr<uint8_t> *auth_token, uint32_t *length, uint64_t timestamp,
+    void MintAuthToken(std::unique_ptr<uint8_t> *auth_token, uint32_t *length, uint64_t timestamp,
             secure_id_t user_id, secure_id_t authenticator_id, uint64_t challenge);
 
     /**
