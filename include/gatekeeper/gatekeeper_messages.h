@@ -17,7 +17,7 @@
 #define GATEKEEPER_MESSAGES_H_
 
 #include <stdint.h>
-#include <memory>
+#include <UniquePtr.h>
 
 
 #include "gatekeeper_utils.h"
@@ -64,7 +64,7 @@ struct SizedBuffer {
         length = len;
     }
 
-    std::unique_ptr<uint8_t[]> buffer;
+    UniquePtr<uint8_t[]> buffer;
     uint32_t length;
 };
 
