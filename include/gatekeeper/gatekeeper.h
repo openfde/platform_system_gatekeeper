@@ -18,8 +18,8 @@
 #define GATEKEEPER_H_
 
 #include <stdint.h>
-#include <UniquePtr.h>
 #include <hardware/hw_auth_token.h>
+#include <nativehelper/UniquePtr.h>
 
 #include "gatekeeper_messages.h"
 #include "password_handle.h"
