@@ -17,7 +17,7 @@
 #define GATEKEEPER_MESSAGES_H_
 
 #include <stdint.h>
-#include <nativehelper/UniquePtr.h>
+#include <UniquePtr.h>
 
 
 #include "gatekeeper_utils.h"
