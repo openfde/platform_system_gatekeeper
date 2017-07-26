@@ -17,9 +17,10 @@
 #define GATEKEEPER_MESSAGES_H_
 
 #include <stdint.h>
+#include <UniquePtr.h>
+
 
 #include "gatekeeper_utils.h"
-#include "UniquePtr.h"
 /**
  * Message serialization objects for communicating with the hardware gatekeeper.
  */
