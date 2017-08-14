@@ -16,10 +16,6 @@
 // GoogleGateKeeper implementation, e.g. one running in TrustZone.
 cc_library_shared {
     name: "libgatekeeper",
-    vendor_available: true,
-    vndk: {
-        enabled: true,
-    },
     srcs: [
         "gatekeeper_messages.cpp",
         "gatekeeper.cpp",
