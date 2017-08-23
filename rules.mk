@@ -8,6 +8,8 @@ MODULE_SRCS := \
 
 GLOBAL_INCLUDES += $(LOCAL_DIR)/include/
 
+MODULE_CPPFLAGS := -std=c++11
+
 MODULE_DEPS := \
 	lib/libc \
 	lib/libc-trusty \
