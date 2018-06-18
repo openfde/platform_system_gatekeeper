@@ -254,11 +254,11 @@ void GateKeeper::MintAuthToken(UniquePtr<uint8_t> *auth_token, uint32_t *length,
  * Calculates the timeout in milliseconds as a function of the failure
  * counter 'x' as follows:
  *
- * [0. 5) -> 0
+ * [0, 4] -> 0
  * 5 -> 30
- * [6, 10) -> 0
- * [11, 30) -> 30
- * [30, 140) -> 30 * (2^((x - 30)/10))
+ * [6, 10] -> 0
+ * [11, 29] -> 30
+ * [30, 139] -> 30 * (2^((x - 30)/10))
  * [140, inf) -> 1 day
  *
  */
