@@ -232,7 +232,7 @@ void GateKeeper::MintAuthToken(UniquePtr<uint8_t> *auth_token, uint32_t *length,
     token->challenge = challenge;
     token->user_id = user_id;
     token->authenticator_id = authenticator_id;
-    token->authenticator_type = htonl(HW_AUTH_PASSWORD);
+    token->authenticator_type = htobe32(HW_AUTH_PASSWORD);
     token->timestamp = htobe64(timestamp);
 
     const uint8_t *auth_token_key = NULL;
