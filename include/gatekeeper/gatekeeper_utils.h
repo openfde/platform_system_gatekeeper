@@ -53,5 +53,25 @@ static inline int memcmp_s(const void* p1, const void* p2, size_t length) {
     return result == 0 ? 0 : 1;
 }
 
+template<typename T> struct remove_reference      {typedef T type;};
+template<typename T> struct remove_reference<T&>  {typedef T type;};
+template<typename T> struct remove_reference<T&&> {typedef T type;};
+template<typename T>
+using remove_reference_t = typename remove_reference<T>::type;
+template<typename T>
+remove_reference_t<T>&& move(T&& x) {
+    return static_cast<remove_reference_t<T>&&>(x);
+}
+
+template<typename T>
+constexpr T&& forward(remove_reference_t<T>& x) {
+    return static_cast<T&&>(x);
+}
+template<typename T>
+constexpr T&& forward(remove_reference_t<T>&& x) {
+    return static_cast<T&&>(x);
+}
+
+
 };
 #endif //GOOGLE_GATEKEEPER_UTILS_H_
