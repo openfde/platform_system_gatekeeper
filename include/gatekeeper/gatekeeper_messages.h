@@ -92,7 +92,6 @@ struct SizedBuffer {
         return nullptr;
     }
 
-private:
     UniquePtr<uint8_t[]> buffer;
     uint32_t length;
 };
